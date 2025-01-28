@@ -4,4 +4,4 @@ make:
 
 input:
 	g++ -o out_crea input_creator.cpp
-	./out_crea input.txt 100000000
+	./out_crea input.txt 100
