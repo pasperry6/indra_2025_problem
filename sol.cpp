@@ -15,60 +15,31 @@ public:
         char ch;
         string fourg;
 
-        // iterate through file
-        while (file.get(ch)) {
-            fourg = fourg + ch; //add new char to create four gram
+        while (file.get(ch)) { // iterate through file, char by char
+            fourg = fourg + ch; // add new char to create four gram
 
-            // to handle the beginning of files
-            if (fourg.length() < 4) {
-                continue;
-            }
+            if (fourg.length() > 4) fourg.erase(0,1); // keep fourg to <= 4 chars
 
-            mapping(fourg); // going through each one, two, three, four grams in the four gram
-
-            // to handle end of files
-            if (file.peek() == EOF) {
-                // handle the threeg, twog, and oneg
-                fourg.erase(0,1);
-                mapping(fourg);
-                fourg.erase(0,1);
-                mapping(fourg);
-                fourg.erase(0,1);
-                mapping(fourg);
-                break; //done with file
-            }
-
-            fourg.erase(0, 1); //delete first char (to make room for new char)
+            add_to_map(fourg); // mapping each one, two, three, four grams in the four gram
         }
+        write_output(); // write to output file
+    }
 
-        // write to output file
-        write_output();
+    void add_to_map(string gram) {
+        int size = gram.length();
+        for (int i = 0; i < size; i++) {
+            map[gram]++;
+            gram.erase(0,1);
+        }
     }
 
     void write_output(void) {
         ofstream file("output.txt");
-
-        // Write map content to the file
-        for (std::unordered_map<std::string, int>::iterator it = map.begin(); it != map.end(); ++it) {
-            file << it->first << " : " << it->second << std::endl;
+        for (auto it = map.begin(); it != map.end(); it++) { // iterate through map, without order
+            file << it->first << " : " << it->second << endl;
         }
-
         file.close();
     }
-
-    void mapping(string gram) {
-        int size = gram.length();
-        for (int i = 0; i < size; i++) {
-            if (map.find(gram) == map.end()) {
-                map[gram] = 1;
-            }
-            else {
-                map[gram] = map[gram] + 1;
-            }
-            gram.pop_back();
-        }
-    }
-
 };
 
 int main(int args, char** kwargs) {
