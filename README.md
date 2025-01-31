@@ -1,8 +1,8 @@
 # indra_2025_problem
 ## how to run
-"make input NUM=n" from the command line creates an input.txt file with "n" random letters.
-"make" from the command line creates an output.txt file of n-grams (n <= 4) and frequency from input.txt. 
-"make time" times the execution of the make command 
+-"make input NUM=n" from the command line creates an input.txt file with "n" random letters.
+-"make" from the command line creates an output.txt file of n-grams (n <= 4) and frequency from input.txt. 
+-"make time" times the execution of the make command 
 
 ## pre-work (thought) process:
 I first thought of the most simple (incorrect) ways that this could be done. I thought that it would be to keep a list of grams 
@@ -21,7 +21,7 @@ implementation I would have had to use.
 I have to think about the way to iterate through each letter. My first thought is that each lesser gram is included in the first 
 1,2,3 characters of the 4 gram, so I just go through the 4 grams from the start. 
 
-Final process: Using an unordered_map from c++ library, the time complexity is O(n) because lookup time is (about) constant. 
+Final process: Using an unordered_map from c++ library, the time complexity is O(n) because lookup time is (usually) constant. 
 
 ## work process:
 1/27 
