@@ -1,28 +1,22 @@
 # indra_2025_problem
-## questions:
-1. what is the input file type?
-2. what is the output file type and format?
-3. 
-
-## to check:
-1. works with cpp 11.
-2. worst case analysis.
-
-
 ## pre-work (thought) process:
 I first thought of the most simple (incorrect) ways that this could be done. I thought that it would be to keep a list of grams 
-and go through the list every time i found a new gram. That would be terrible. Worst case analysis:
-In the worst case, the program would fill a list with letters and would have to go down that list every time to find the correct gram. 
-Just for the single grams, this would cost ~n*26 (when a hashmap would cost ~n). For the 2 grams, almost every gram would be new, and 
-this would be O(n^2).   
+and go through the list every time I found a new gram. That would be terrible. Worst case analysis:
+In the worst case, the program would fill a list with letters and would have to go down that list every time to find the correct gram.
+This type of list insertion, in the worst case is O(n^2). n + (n-1) + (n-2) + ... + 1 = (n*(n+1))/2.
 
-Second, I tought that I knew from experience that hashmap worked very wel for looking up existing codes and adding to them.
+Second, I tought that I knew from experience that hashmap worked very wel for looking up existing grams and adding to them.
 I knew that a simple hashmap would suffice for the single grams. I then thought that a tree would be necessary for the multi-digit
 grams. I thought, for a second, that I could use a full hashmap with multiple hashmaps as children; however, the space for this 
 would be 26^2. Therefore, I have to use a variably-sized hashmap with a sorting algorithim to find the location in the map. 
 
+After realizing that C++ has an inbuilt hashmap that can handle this for me, I used that instead of the complicated c-style 
+implementation I would have had to use. 
+
 I have to think about the way to iterate through each letter. My first thought is that each lesser gram is included in the first 
 1,2,3 characters of the 4 gram, so I just go through the 4 grams from the start. 
+
+Final process: Using an unordered_map from c++ library, the time complexity is O(n) because lookup time is (about) constant. 
 
 ## work process:
 1/27 
@@ -36,3 +30,7 @@ I would make variably sized maps that double in size when about to overflow. I w
 
 So far, I have an implementation that takes about 5 minutes to complete this algorithm. This is just using one unordered map from the cpp 
 library. I am trying to think of ways to improve the time. I think that one big hashmap may not be the fastest way to get this done. 
+
+1/30
+I simplified the code to not include some unnecessary checks, but that will not change that the code has a time complexity of ~O(n).
+I also made a graph of the timing to double check the time complexity, and it looks like O(n) is correct. 
